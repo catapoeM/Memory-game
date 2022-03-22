@@ -1,5 +1,25 @@
 function pageLoad() {
   createTable();
+  
+  var imgArray = new Array()
+
+  for (var i = 0; i < 5; ++i) {
+    imgArray[i] = new Image()
+    imgArray[i].src = 
+  }
+  var img1 = document.createElement('img');
+  var img2 = document.createElement('img');
+  var img3 = document.createElement('img');
+  var img4 = document.createElement('img');
+  var img5 = document.createElement('img');
+  var img6 = document.createElement('img');
+  img1.src = '/img/jaguar.jpg'
+  img2.src = '/img/lion.jpg'
+  img3.src = '/img/safari.jpg'
+  img4.src = '/img/tiger.jpg'
+  img5.src = '/img/wildness.jpg'
+  img6.src = '/img/wolf.jpg'
+  var 
 
   function createTable() {
     var table = document.getElementById('table');
@@ -11,7 +31,9 @@ function pageLoad() {
         cell.addEventListener("click", function(c) {
           alert(this.id)
         });
-        cell.innerHTML = idCell;
+        cell.style.backgroundColor = "black";
+        cell.style.borderColor = "white"
+        
       }
     }
   }
@@ -22,4 +44,4 @@ function pageLoad() {
   }
     
     
-  }
+}
