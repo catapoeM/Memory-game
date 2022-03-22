@@ -5,7 +5,8 @@ table {
 }
 
 tr, td{
-    border: 1px solid black;
-    width: 5cm;
+    border: 2px solid black;
+    width: 6cm;
     height: 5cm;
+    color: black;
 }
