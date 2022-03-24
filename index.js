@@ -1,26 +1,12 @@
 function pageLoad() {
-  getImages()
-  createTable();
+  createTable()
 
-  function getImages(imgArray = new Array(), imgArrayCopy = new Array()) {
-    for (let i = 1; i < 7; ++i) {
-      imgArray[i] = new Image()
-      imgArray[i].src = 'img/' + i + '.jpg'
-      imgArrayCopy[i] = new Image()
-      imgArrayCopy[i].src = 'imgCpy/' + i + '.jpg'
-    }
-    return imgArray, imgArrayCopy
-  }
-
-  function createTable() {
+  function createTable() {  
     var imgArray = getImages.call(imgArray);
-    var imgArrayCopy = getImages.call(imgArrayCopy)
-    
     var table = document.getElementById('table');
-    for (var i = 0, idCell = 1, index_img = 1; i < 3; ++i) {
+    for (var i = 0, idCell = 1, k = 1; i < 3; ++i) {
       var row = table.insertRow(i);     // Create an empty <tr> element and add it to the 1st position of the table
-      for (var j = 0; j < 4; ++j, ++idCell, ++index_img) {
-        
+      for (var j = 0; j < 4; ++j, ++idCell) {
         var cell = row.insertCell(j);   // Insert new cell (<td> elements) at the 1st position of the "new" <tr> element
         cell.setAttribute('id', idCell)
         cell.addEventListener("click", function(c) {
@@ -28,23 +14,36 @@ function pageLoad() {
         });
         cell.style.backgroundColor = "black";
         cell.style.borderColor = "white"
-        if (idCell < 7) {
+        if (k < 13) {
           var img = document.createElement('img')
-          var img = imgArray[index_img]
+          var img = imgArray[k]
           cell.appendChild(img)
-        }else if (idCell >= 7) {
-          if (idCell == 7) {
-            index_img = 1;
-          }
-          var imgC = document.createElement('img')
-          var imgC = imgArrayCopy[index_img]
-          cell.appendChild(imgC)
+          ++k;
         }
-        
+            
       }
     }
   }
-  
-    
-    
+
+  function getImages(imgArray = new Array()) {
+    var randomNumbers = mathRandom.call(randomNumbers)
+    alert("get " + randomNumbers[0])
+    alert(randomNumbers)
+    for (let i = 1, j = randomNumbers[i]; i < 13; ++i, j = randomNumbers[i]) {
+        imgArray[j] = new Image()
+        imgArray[j].src = 'img/' + i + '.jpg'
+      
+    }
+    return imgArray
+  }
+
+  function mathRandom(randomNumbers = new Array()) {
+    while(randomNumbers.length < 12) {
+      var r = Math.floor(Math.random() * 12)
+      if(randomNumbers.indexOf(r) === -1) {
+        randomNumbers.push(r)
+      }
+    }
+    return randomNumbers
+  }
 }
