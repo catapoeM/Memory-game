@@ -13,14 +13,32 @@ function pageLoad() {
         var cell = row.insertCell(j);   // Insert new cell (<td> elements) at the 1st position of the "new" <tr> element
         cell.setAttribute('name', imgArray[idCell].alt)
         cell.setAttribute('id', idCell)
+        var name2 = null, idCell2 = null;
         cell.addEventListener("click", function() {
           var name = this.getAttribute('name')
           var idCell = this.getAttribute('id')
           var img = document.createElement('img')
           var img = imgArray[idCell]
           this.appendChild(img)
-          myFunction(imgArray, name, idCell)
+          
+          
+            
+            if (name2 == null) {
+              name2 = name;
+              idCell2 = idCell;
+            }else if (name2 != null && name == name2) {
+              alert('it is equal')
+              name2 = null
+              idCell2 = null;
+            }else if (name2 != null && name != name2) {
+              alert(name + "-id-" + idCell + " and " + name2 + "-id-" + idCell2 + ' not equal')
+              name2 = null
+              idCell2 = null;
+            }
+
+            myFunction(imgArray, name, idCell, cell, img)
         });
+
         cell.style.width = '6cm'
         cell.style.height = '6cm'
         cell.style.border = '2px solid'
