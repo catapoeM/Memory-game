@@ -11,22 +11,33 @@ function pageLoad() {
       var row = table.insertRow(i);     // Create an empty <tr> element and add it to the 1st position of the table
       for (var j = 0; j < 4; ++j, ++idCell) {
         var cell = row.insertCell(j);   // Insert new cell (<td> elements) at the 1st position of the "new" <tr> element
-        cell.setAttribute('id', imgArray[idCell].alt)
-        cell.addEventListener("click", function(c) {
-          alert(this.id)
+        cell.setAttribute('name', imgArray[idCell].alt)
+        cell.setAttribute('id', idCell)
+        cell.addEventListener("click", function() {
+          var name = this.getAttribute('name')
+          var idCell = this.getAttribute('id')
+          var img = document.createElement('img')
+          var img = imgArray[idCell]
+          this.appendChild(img)
+          myFunction(imgArray, name, idCell)
         });
-        cell.style.width = '6px'
-        cell.style.height = '5px'
+        cell.style.width = '6cm'
+        cell.style.height = '6cm'
         cell.style.border = '2px solid'
         cell.style.backgroundColor = "black";
         cell.style.borderColor = "white"
-        if (idCell < 12) {
+        /*if (idCell < 12) {
           var img = document.createElement('img')
           var img = imgArray[idCell]
           cell.appendChild(img)
-        }
+        }*/
       }
     }
+  }
+
+  function myFunction(imgArray, name, idCell) {
+    alert(name + " " + idCell)
+    
   }
 
   function getImages(imgArray = new Array()) {
@@ -42,9 +53,9 @@ function pageLoad() {
       }
       array2[i].alt = picturesName[k];
     }
-    // We call the mathRandom function to mix the pictures
+    // We call the mathRandom function to mix the pictures...
     var randomNumbers = mathRandom.call(randomNumbers)
-    // after the function is called we memorize the mixed pictures 
+    // ...after the function is called we memorize the mixed pictures 
     for (let i = 0, j = randomNumbers[i]; i < 12; ++i, j = randomNumbers[i]) {
       imgArray[j] = array2[i];
     }
