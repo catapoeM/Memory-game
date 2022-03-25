@@ -11,7 +11,7 @@ function pageLoad() {
       var row = table.insertRow(i);     // Create an empty <tr> element and add it to the 1st position of the table
       for (var j = 0; j < 4; ++j, ++idCell) {
         var cell = row.insertCell(j);   // Insert new cell (<td> elements) at the 1st position of the "new" <tr> element
-        cell.setAttribute('id', idCell)
+        cell.setAttribute('id', imgArray[idCell].alt)
         cell.addEventListener("click", function(c) {
           alert(this.id)
         });
@@ -29,14 +29,25 @@ function pageLoad() {
     }
   }
 
-  function getImages(imgArray = new Array(), imgId = new Array()) {
+  function getImages(imgArray = new Array()) {
+    var picturesName = ['wolf', 'leopard', 'safari', 'mountains', 'tiger', 'lion']
     var randomNumbers = mathRandom.call(randomNumbers)
-    for (let i = 0, j = randomNumbers[i]; i < 12; ++i, j = randomNumbers[i]) {
-        imgArray[i] = new Image()
-        imgArray[i].src = 'img/' + j + '.jpg'
-        imgId[i] = imgArray[i].src
+    imgArray2 = new Array();
+    for (let i = 0, k = 0, l = 0; i < 12; ++i, ++l) {
+      imgArray2[i] = new Image()
+      imgArray2[i].src = 'img/' + i + '.jpg'
+      if (l > 1) {
+        ++k
+        l = 0;
+      }
+      imgArray2[i].alt = picturesName[k];
     }
-    alert(imgId)
+    for (let i = 0, j = randomNumbers[i]; i < 12; ++i, j = randomNumbers[i]) {
+      imgArray[j] = imgArray2[i];
+    }
+    for (let i = 0; i < 12; ++i) {
+      alert(imgArray[i].alt)
+    }
     return imgArray
   }
 
