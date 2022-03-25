@@ -31,22 +31,22 @@ function pageLoad() {
 
   function getImages(imgArray = new Array()) {
     var picturesName = ['wolf', 'leopard', 'safari', 'mountains', 'tiger', 'lion']
-    var randomNumbers = mathRandom.call(randomNumbers)
-    imgArray2 = new Array();
+    // In the array2 we memorize the img, source, and the specific name
+    array2 = new Array();
     for (let i = 0, k = 0, l = 0; i < 12; ++i, ++l) {
-      imgArray2[i] = new Image()
-      imgArray2[i].src = 'img/' + i + '.jpg'
+      array2[i] = new Image()
+      array2[i].src = 'img/' + i + '.jpg'
       if (l > 1) {
         ++k
         l = 0;
       }
-      imgArray2[i].alt = picturesName[k];
+      array2[i].alt = picturesName[k];
     }
+    // We call the mathRandom function to mix the pictures
+    var randomNumbers = mathRandom.call(randomNumbers)
+    // after the function is called we memorize the mixed pictures 
     for (let i = 0, j = randomNumbers[i]; i < 12; ++i, j = randomNumbers[i]) {
-      imgArray[j] = imgArray2[i];
-    }
-    for (let i = 0; i < 12; ++i) {
-      alert(imgArray[i].alt)
+      imgArray[j] = array2[i];
     }
     return imgArray
   }
