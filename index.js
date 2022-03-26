@@ -4,58 +4,31 @@ function pageLoad() {
   function createTable() {  
     var imgArray = getImages.call(imgArray);
     var table = document.getElementById('table');
-    table.style.marginLeft = 'auto'
-    table.style.marginRight = 'auto'
-    table.style.marginTop = '1cm'
+    styleTable(table)
     for (var i = 0, idCell = 0; i < 3; ++i) {
       var row = table.insertRow(i);     // Create an empty <tr> element and add it to the 1st position of the table
       for (var j = 0; j < 4; ++j, ++idCell) {
         var cell = row.insertCell(j);   // Insert new cell (<td> elements) at the 1st position of the "new" <tr> element
         cell.setAttribute('name', imgArray[idCell].alt)
         cell.setAttribute('id', idCell)
-        var name2 = null, idCell2 = null;
-        cell.addEventListener("click", function() {
-          var name = this.getAttribute('name')
-          var idCell = this.getAttribute('id')
-          var img = document.createElement('img')
-          var img = imgArray[idCell]
-          this.appendChild(img)
-          
-          
-            
-            if (name2 == null) {
-              name2 = name;
-              idCell2 = idCell;
-            }else if (name2 != null && name == name2) {
-              alert('it is equal')
-              name2 = null
-              idCell2 = null;
-            }else if (name2 != null && name != name2) {
-              alert(name + "-id-" + idCell + " and " + name2 + "-id-" + idCell2 + ' not equal')
-              name2 = null
-              idCell2 = null;
-            }
 
-            myFunction(imgArray, name, idCell, cell, img)
+        cell.addEventListener("click", function() {
+          var id = this.getAttribute('id')
+          var img = document.createElement('img')
+          img = imgArray[id]
+          this.appendChild(img)
+          alert(this.getAttribute('id'))
+          remove(cell, img, id)
         });
 
-        cell.style.width = '6cm'
-        cell.style.height = '6cm'
-        cell.style.border = '2px solid'
-        cell.style.backgroundColor = "black";
-        cell.style.borderColor = "white"
-        /*if (idCell < 12) {
-          var img = document.createElement('img')
-          var img = imgArray[idCell]
-          cell.appendChild(img)
-        }*/
+        styleCells(cell)
       }
     }
   }
 
-  function myFunction(imgArray, name, idCell) {
-    alert(name + " " + idCell)
-    
+  function remove(cell, img, id) {
+    alert(cell.getAttribute('id') + " -cells")
+    cell.removeChild(img)
   }
 
   function getImages(imgArray = new Array()) {
@@ -88,5 +61,19 @@ function pageLoad() {
       }
     }
     return randomNumbers
+  }
+
+  function styleCells(cell) {
+    cell.style.width = '6cm'
+    cell.style.height = '6cm'
+    cell.style.border = '2px solid'
+    cell.style.backgroundColor = "black";
+    cell.style.borderColor = "white" 
+  }
+
+  function styleTable(table) {
+    table.style.marginLeft = 'auto'
+    table.style.marginRight = 'auto'
+    table.style.marginTop = '1cm'
   }
 }
