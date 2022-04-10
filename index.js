@@ -4,7 +4,7 @@ function pageLoad() {
   function createTable() {  
     var imgArray = getImages.call(imgArray);
     var table = document.getElementById('table');
-    let clickedAmount = 0, name2, id2;
+    let clickedAmount = 0, name2, idPic_2;
     styleTable(table)
     for (var i = 0, idCell = 0; i < 3; ++i) {
       var row = table.insertRow(i);     // Create an empty <tr> element and add it to the 1st position of the table
@@ -25,29 +25,34 @@ function pageLoad() {
           alert(namePic + " " + idPic + " " + clickedAmount)
           if (clickedAmount < 2) {
             name2 = namePic;
-            id2 = idPic;
+            idPic_2 = idPic;
           }else if (clickedAmount >= 2) {
             if (namePic == name2) {
               alert('egalitate')
             } else {
               alert('ne')
-              remove(idPic, id2)
+              removeImg(idPic, idPic_2)
             }
             clickedAmount = 0;
           }
         });
-
         styleCells(cell)
       }
     }
   }
 
-  function remove(idPic, id2) {
-    var table = document.getElementById('table');
-    while(table.hasChildNodes()) {
-      
+  function removeImg(idPic, idPic_2) {
+    let table = document.getElementById('table');
+    let idCell = 0;
+    for (let i = 0; i < 3; ++i) {
+      for (let j = 0; j < 4; ++j, ++idCell) {
+        if (idCell == idPic || idCell == idPic_2) {
+          table.rows[i].cells[j].innerHTML = '';
+        }
+      }
     }
-    alert(idPic + " -r- " + id2)
+    
+    
   }
 
   function getImages(imgArray = new Array()) {
