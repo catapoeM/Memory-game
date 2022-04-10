@@ -30,8 +30,7 @@ function pageLoad() {
             if (namePic == name2) {
               alert('egalitate')
             } else {
-              alert('ne')
-              removeImg(idPic, idPic_2)
+              setTimeout(removeImg, 2000, table, idPic, idPic_2);
             }
             clickedAmount = 0;
           }
@@ -41,8 +40,7 @@ function pageLoad() {
     }
   }
 
-  function removeImg(idPic, idPic_2) {
-    let table = document.getElementById('table');
+  function removeImg(table, idPic, idPic_2) {
     let idCell = 0;
     for (let i = 0; i < 3; ++i) {
       for (let j = 0; j < 4; ++j, ++idCell) {
@@ -51,8 +49,6 @@ function pageLoad() {
         }
       }
     }
-    
-    
   }
 
   function getImages(imgArray = new Array()) {
