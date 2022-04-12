@@ -14,12 +14,12 @@ function pageLoad() {
         cell.setAttribute('id', idCell)
 
         cell.addEventListener("click", function() {
-          var id = this.getAttribute('id')
-          var img = document.createElement('img')
-          img = imgArray[id]
+          let chooseFunc = 0;
+          let idPic = this.getAttribute('id')
+          let img = document.createElement('img')
+          img = imgArray[idPic]
           this.appendChild(img)  
           let namePic = this.getAttribute('name')
-          let idPic = this.getAttribute('id')
           ++clickedAmount;
           if (clickedAmount < 2 && idPic != idPic_2) {
             name2 = namePic;
@@ -30,9 +30,9 @@ function pageLoad() {
           }else if (clickedAmount >= 2) {
             if (namePic == name2) {
               alert('egalitate')
-              removeAttribute(table, idPic, idPic_2)
+              remove(table, idPic, idPic_2, chooseRemove = 1)
             }else {
-              setTimeout(removeImg, 2000, table, idPic, idPic_2);
+              setTimeout(remove, 2000, table, idPic, idPic_2, chooseRemove = 2);
             }
             clickedAmount = 0;
           }
@@ -42,29 +42,19 @@ function pageLoad() {
     }
   }
 
-  function removeAttribute(table, idPic, idPic_2) {
-    alert("remove " + idPic + " " + idPic_2)
+  function remove(table, idPic, idPic_2, chooseRemove) {
     let idCell = 0;
     for (let i = 0, j = 0; i < 3 || j < 4; ++j, ++idCell) {
       if (j == 4) {
         ++i,
         j = 0;
       }
-      if (idCell == idPic || idCell == idPic_2) {
+      if ((idCell == idPic || idCell == idPic_2) && chooseRemove == 1) {
         table.rows[i].cells[j].setAttribute('id', -1);
-      }
-    }
-  }
-
-  function removeImg(table, idPic, idPic_2) {
-    let idCell = 0;
-    for (let i = 0, j = 0; i < 3 || j < 4; ++j, ++idCell) {
-      if (j == 4) {
-        ++i,
-        j = 0;
-      }
-      if (idCell == idPic || idCell == idPic_2) {
+        alert("set - 1 " + idPic + " " + idPic_2)
+      }else if ((idCell == idPic || idCell == idPic_2) && chooseRemove == 2) {
         table.rows[i].cells[j].innerHTML = '';
+        alert("remove " + idPic + " " + idPic_2)
       }
     }
   }
