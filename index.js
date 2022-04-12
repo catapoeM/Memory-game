@@ -30,7 +30,7 @@ function pageLoad() {
           }else if (clickedAmount >= 2) {
             if (namePic == name2) {
               alert('egalitate')
-              removeEventPic(table, idPic, idPic_2)
+              removeAttribute(table, idPic, idPic_2)
             }else {
               setTimeout(removeImg, 2000, table, idPic, idPic_2);
             }
@@ -42,9 +42,18 @@ function pageLoad() {
     }
   }
 
-  function removeEventPic(table, idPic, idPic_2) {
+  function removeAttribute(table, idPic, idPic_2) {
     alert("remove " + idPic + " " + idPic_2)
-    
+    let idCell = 0;
+    for (let i = 0, j = 0; i < 3 || j < 4; ++j, ++idCell) {
+      if (j == 4) {
+        ++i,
+        j = 0;
+      }
+      if (idCell == idPic || idCell == idPic_2) {
+        table.rows[i].cells[j].setAttribute('id', -1);
+      }
+    }
   }
 
   function removeImg(table, idPic, idPic_2) {
