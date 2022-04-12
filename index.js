@@ -17,19 +17,21 @@ function pageLoad() {
           var id = this.getAttribute('id')
           var img = document.createElement('img')
           img = imgArray[id]
-          this.appendChild(img)
-          
+          this.appendChild(img)  
           let namePic = this.getAttribute('name')
           let idPic = this.getAttribute('id')
           ++clickedAmount;
-          alert(namePic + " " + idPic + " " + clickedAmount)
-          if (clickedAmount < 2) {
+          if (clickedAmount < 2 && idPic != idPic_2) {
             name2 = namePic;
             idPic_2 = idPic;
+          }else if (clickedAmount >= 2 && idPic == idPic_2) {
+            --clickedAmount;
+            alert('another pic')
           }else if (clickedAmount >= 2) {
             if (namePic == name2) {
               alert('egalitate')
-            } else {
+              removeEventPic(table, idPic, idPic_2)
+            }else {
               setTimeout(removeImg, 2000, table, idPic, idPic_2);
             }
             clickedAmount = 0;
@@ -40,13 +42,20 @@ function pageLoad() {
     }
   }
 
+  function removeEventPic(table, idPic, idPic_2) {
+    alert("remove " + idPic + " " + idPic_2)
+    
+  }
+
   function removeImg(table, idPic, idPic_2) {
     let idCell = 0;
-    for (let i = 0; i < 3; ++i) {
-      for (let j = 0; j < 4; ++j, ++idCell) {
-        if (idCell == idPic || idCell == idPic_2) {
-          table.rows[i].cells[j].innerHTML = '';
-        }
+    for (let i = 0, j = 0; i < 3 || j < 4; ++j, ++idCell) {
+      if (j == 4) {
+        ++i,
+        j = 0;
+      }
+      if (idCell == idPic || idCell == idPic_2) {
+        table.rows[i].cells[j].innerHTML = '';
       }
     }
   }
