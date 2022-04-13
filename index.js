@@ -4,7 +4,7 @@ function pageLoad() {
   function createTable() {  
     var imgArray = getImages.call(imgArray);
     var table = document.getElementById('table');
-    let clickedAmount = 0, name2, idPic_2, counter;
+    let clickedAmount = 0, name2, idPic_2, blockTable = 0;
     styleTable(table)
     for (var i = 0, idCell = 0; i < 3; ++i) {
       var row = table.insertRow(i);     // Create an empty <tr> element and add it to the 1st position of the table
@@ -12,27 +12,30 @@ function pageLoad() {
         var cell = row.insertCell(j);   // Insert new cell (<td> elements) at the 1st position of the "new" <tr> element
         cell.setAttribute('name', imgArray[idCell].alt)
         cell.setAttribute('id', idCell)
-        
         cell.addEventListener("click", function() {
-          let idPic = this.getAttribute('id')
-          let img = document.createElement('img')
-          img = imgArray[idPic]
-          this.appendChild(img)  
-          let namePic = this.getAttribute('name')
-          ++clickedAmount;
-          alert(clickedAmount)
+          let namePic, idPic, img;
+          if (blockTable == 0) {
+            idPic = this.getAttribute('id')
+            img = document.createElement('img')
+            img = imgArray[idPic]
+            this.appendChild(img)  
+            namePic = this.getAttribute('name')
+            ++clickedAmount;
+          }
           if (clickedAmount < 2 && idPic != idPic_2) {
             name2 = namePic;
             idPic_2 = idPic;
           }else if (clickedAmount >= 2 && idPic == idPic_2) {
             --clickedAmount;
-            alert('another pic')
           }else if (clickedAmount >= 2) {
             if (namePic == name2) {
-              alert('egalitate')
               remove(table, idPic, idPic_2, chooseRemove = 1)
             }else {
+              blockTable = 1;
               setTimeout(remove, 2000, table, idPic, idPic_2, chooseRemove = 2);
+              setTimeout(function() {
+                blockTable = 0;
+              }, 2000)
             }
             clickedAmount = 0;
           }
@@ -56,8 +59,6 @@ function pageLoad() {
       }
     }
   }
-
-  
 
   function getImages(imgArray = new Array()) {
     var picturesName = ['wolf', 'leopard', 'safari', 'mountains', 'tiger', 'lion']
