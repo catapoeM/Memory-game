@@ -20,7 +20,6 @@ function startGame() {
         cell.addEventListener("click", function() {
           let namePic, idPic, img;
           if (blockTable == 0) {
-            
             infoGame.innerText = 'Memorise the picture and try to find its duplicate!'; 
             idPic = this.getAttribute('id')
             img = document.createElement('img')
@@ -67,7 +66,7 @@ function startGame() {
         if (gameFinished < 12) {
           infoGame.innerText = 'Congratulations, you found one pair!'
         }else {
-          infoGame.innerText = 'Game finished! Your number of wrong attempts are: ' + wrongAttempts + '!'
+          infoGame.innerText = 'Game finished! Your number of wrong attempts are: ' + wrongAttempts + ' !'
           resetGame()
         }
       }else if ((idCell == idPic || idCell == idPic_2) && chooseRemove == 2) {
@@ -134,7 +133,8 @@ function startGame() {
       let table = document.getElementById('table')
       table.removeChild(table.firstElementChild)
       motherBtn.removeChild(motherBtn.firstElementChild)
+      startGameButton.disabled = false;
     })
-    startGameButton.disabled = false;
+    
   }
 }
