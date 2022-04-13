@@ -1,4 +1,9 @@
-function pageLoad() {
+function startGame() {
+  let startGameButton = document.getElementById('startBtn');
+  startGameButton.disabled = true
+  let infoGame = document.getElementById('infoGame');
+  infoGame.innerText = "Let's begin the game! Tap on one of the blocks"
+  let wrongAttempts = 0, gameFinished = 0;
   createTable()
 
   function createTable() {  
@@ -15,6 +20,8 @@ function pageLoad() {
         cell.addEventListener("click", function() {
           let namePic, idPic, img;
           if (blockTable == 0) {
+            
+            infoGame.innerText = 'Memorise the picture and try to find its duplicate!'; 
             idPic = this.getAttribute('id')
             img = document.createElement('img')
             img = imgArray[idPic]
@@ -31,6 +38,8 @@ function pageLoad() {
             if (namePic == name2) {
               remove(table, idPic, idPic_2, chooseRemove = 1)
             }else {
+              ++wrongAttempts;
+              infoGame.innerText = 'The second picture does not fit to the first one, but try it again! Attempts: ' + wrongAttempts
               blockTable = 1;
               setTimeout(remove, 2000, table, idPic, idPic_2, chooseRemove = 2);
               setTimeout(function() {
@@ -54,6 +63,13 @@ function pageLoad() {
       }
       if ((idCell == idPic || idCell == idPic_2) && chooseRemove == 1) {
         table.rows[i].cells[j].setAttribute('id', -1);
+        ++gameFinished
+        if (gameFinished < 12) {
+          infoGame.innerText = 'Congratulations, you found one pair!'
+        }else {
+          infoGame.innerText = 'Game finished! Your number of wrong attempts are: ' + wrongAttempts + '!'
+          resetGame()
+        }
       }else if ((idCell == idPic || idCell == idPic_2) && chooseRemove == 2) {
         table.rows[i].cells[j].innerHTML = '';
       }
@@ -104,5 +120,21 @@ function pageLoad() {
     table.style.marginLeft = 'auto'
     table.style.marginRight = 'auto'
     table.style.marginTop = '1cm'
+  }
+
+  function resetGame() {
+    var motherBtn = document.getElementById('motherBtn')
+    var button = document.createElement("button");
+    button.style.color = 'red'
+    button.style.marginLeft = 'auto'
+    var text = document.createTextNode("Reset game");
+    button.appendChild(text);
+    motherBtn.appendChild(button);
+    motherBtn.addEventListener('click', function() {
+      let table = document.getElementById('table')
+      table.removeChild(table.firstElementChild)
+      motherBtn.removeChild(motherBtn.firstElementChild)
+    })
+    startGameButton.disabled = false;
   }
 }
