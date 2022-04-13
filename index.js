@@ -135,6 +135,5 @@ function startGame() {
       motherBtn.removeChild(motherBtn.firstElementChild)
       startGameButton.disabled = false;
     })
-    
   }
 }
