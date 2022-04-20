@@ -7,7 +7,7 @@ function startGame() {
   createTable()
 
   function createTable() {  
-    var imgArray = getImages.call(imgArray);
+    var images = getImages.call(images);
     var table = document.getElementById('table');
     let clickedAmount = 0, name2, idPic_2, blockTable = 0;
     styleTable(table)
@@ -15,7 +15,7 @@ function startGame() {
       var row = table.insertRow(i);     // Create an empty <tr> element and add it to the 1st position of the table
       for (var j = 0; j < 4; ++j, ++idCell) {
         var cell = row.insertCell(j);   // Insert new cell (<td> elements) at the 1st position of the "new" <tr> element
-        cell.setAttribute('name', imgArray[idCell].alt)
+        cell.setAttribute('name', images[idCell].alt)
         cell.setAttribute('id', idCell)
         cell.addEventListener("click", function() {
           let namePic, idPic, img;
@@ -23,7 +23,7 @@ function startGame() {
             infoGame.innerText = 'Memorise the picture and try to find its duplicate!'; 
             idPic = this.getAttribute('id')
             img = document.createElement('img')
-            img = imgArray[idPic]
+            img = images[idPic]
             this.appendChild(img)  
             namePic = this.getAttribute('name')
             ++clickedAmount;
@@ -75,26 +75,26 @@ function startGame() {
     }
   }
 
-  function getImages(imgArray = new Array()) {
+  function getImages(images = new Array()) {
     var picturesName = ['wolf', 'leopard', 'safari', 'mountains', 'tiger', 'lion']
-    // In the array2 we memorize the img, source, and the specific name
-    array2 = new Array();
+    // In the imagesInfo we memorize the img, source, and the specific name
+    imagesInfo = new Array();
     for (let i = 0, k = 0, l = 0; i < 12; ++i, ++l) {
-      array2[i] = new Image()
-      array2[i].src = 'img/' + i + '.jpg'
+      imagesInfo[i] = new Image()
+      imagesInfo[i].src = 'img/' + i + '.jpg'
       if (l > 1) {
         ++k
         l = 0;
       }
-      array2[i].alt = picturesName[k];
+      imagesInfo[i].alt = picturesName[k];
     }
     // We call the mathRandom function to mix the pictures...
     var randomNumbers = mathRandom.call(randomNumbers)
     // ...after the function is called we memorize the mixed pictures 
     for (let i = 0, j = randomNumbers[i]; i < 12; ++i, j = randomNumbers[i]) {
-      imgArray[j] = array2[i];
+      images[j] = imagesInfo[i];
     }
-    return imgArray
+    return images
   }
 
   function mathRandom(randomNumbers = new Array()) {
