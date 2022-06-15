@@ -13,7 +13,11 @@
 # Deutsch 
 
 -Testen Sie Ihr Gedächtnis mit diesem Memory-Spiel. Auf dem Spielplan befinden sich immer zwei identische Bilder.
+
 -Starten Sie das Spiel, indem Sie eine Karte umdrehen. Versuchen Sie dann, eine andere Karte zu finden, die das gleiche Bild wie die erste hat.
+
 -Wenn Sie kein Paar finden können, werden die umgedrehten Karten mit der Bildseite nach unten zurückgedreht.
+
 -Versuchen Sie, sich diese Bilder zu merken, da es einfacher wird, Paare zu finden, je länger Sie spielen.
+
 -Wenn Sie ein Paar finden, werden sie vom Brett entfernt, und wenn Sie alle Paare in diesem Speicher finden, haben Sie das Spiel beendet.
